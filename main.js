@@ -5,25 +5,25 @@ const lastchoice=document.querySelector(".lastchoice");
 let num1;
 let num2;
 let operator;
+let result;
 
-function last() {
-    num1=parseFloat(display.innerHTML);
-    num2=parseFloat(lastchoice.innerHTML);
-}
-
-function calculate() {
+function calculate(operator) {
+    num2=parseFloat(display.innerHTML);
+    num1=parseFloat(lastchoice.innerHTML);
     switch (operator) {
         case '+':
-            return num1+num2;
+            result=num1+num2;
         case '-':
-            return num1-num2;
+            result=num1-num2;
         case '*':
-            return num1*num2;
+            result=num1*num2;
         case '÷':
-            return num1/num2;
+            result=num1/num2;
         default:
             break;
     }
+    display.innerHTML=result;
+    lastchoice.innerHTML='';
 }
 
 
@@ -41,17 +41,19 @@ buttons.forEach(button => {
             display.innerHTML=slic.slice(0,slic.length-1);
         }
         else if(button.innerHTML=='='){
-            let result=calculate();
-            console.log(result);
+            calculate(operator);
         }
         else if(isNaN(button.innerHTML)){
             if(button.innerHTML=='.' && !display.innerHTML.includes('.')){
                 display.innerHTML+=button.innerHTML; 
             }
+            else if(button.innerHTML=='.' && display.innerHTML.includes('.')){
+                return;
+            }
             else{
                 operator=button.innerHTML;
                 lastchoice.innerHTML=display.innerHTML;
-                last();
+                display.innerHTML='';
             }
         }
         else{
