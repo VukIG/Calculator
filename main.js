@@ -10,17 +10,20 @@ let result;
 function calculate(operator) {
     num2=parseFloat(display.innerHTML);
     num1=parseFloat(lastchoice.innerHTML);
-    switch (operator) {
-        case '+':
-            result=num1+num2;
-        case '-':
-            result=num1-num2;
-        case '*':
-            result=num1*num2;
-        case '÷':
-            result=num1/num2;
-        default:
-            break;
+    if (operator=='+') {
+        result=num1+num2;
+    }
+    else if (operator=='-') {
+        result=num1-num2;
+    }
+    else if (operator=='*') {
+        result=num1*num2;
+    }
+    else if(operator=='/'){
+        result=num1/num2;
+    }
+    else{
+        console.log('error');
     }
     display.innerHTML=result;
     lastchoice.innerHTML='';
